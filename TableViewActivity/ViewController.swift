@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.activityTableView.isHidden = false
             self.dataForActivity[0].startDateTime = self.getDateTime()
+            print(self.dataForActivity)
             self.reloadTableView()
         }))
         self.present(alert, animated: true, completion: nil)
@@ -90,12 +91,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         
-        
-        
-        
-        
-        
-        
 //        if ((indexPath.row == 0) && dataForActivity[indexPath.row].endDateTime == nil) {
 //            cell.doneBtn.isHidden = false
 //            cell.yetToStartLbl.isHidden = true
@@ -125,32 +120,43 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 //            cell.yetToStartLbl.isHidden = false
 //            cell.yetToStartLbl.text = dataForActivity[indexPath.row].yetToStart
 //        }
+        
         cell.activityNameLbl.text = dataForActivity[indexPath.row].title
-        cell.dateTimeLbl.text = dataForActivity[indexPath.row].endDateTime
+//        cell.dateTimeLbl.text = dataForActivity[indexPath.row].endDateTime
+        
         
         if (dataForActivity[indexPath.row].startDateTime != nil) {
-            
             if (dataForActivity[indexPath.row].endDateTime != nil) {
+                
                 cell.doneBtn.isHidden = true
                 cell.yetToStartLbl.isHidden = true
                 cell.CheckAndDateStackView.isHidden = false
+                cell.dateTimeLbl.text = dataForActivity[indexPath.row].endDateTime
+                cell.contentView.alpha = 1
                 
-                self.activityTableView.reloadData()
             }
             
             else {
                 cell.doneBtn.isHidden = false
                 cell.yetToStartLbl.isHidden = true
                 cell.CheckAndDateStackView.isHidden = true
+                cell.contentView.alpha = 1
                 
                 cell.callbackForDoneButton = {
+                    
                     cell.doneBtn.isHidden = true
                     cell.CheckAndDateStackView.isHidden = false
                     cell.yetToStartLbl.isHidden = true
                     let dateTime = self.getDateTime()
                     cell.dateTimeLbl.text = self.getDateTime()
+                    
                     self.dataForActivity[indexPath.row].endDateTime = dateTime
-                    self.dataForActivity[indexPath.row + 1].startDateTime = dateTime
+                    if (indexPath.row < 4) {
+                        self.dataForActivity[indexPath.row + 1].startDateTime = dateTime
+                    }
+                   
+                    
+//                    if(self.dataForActivity[indexPath.row])
                     
                     self.activityTableView.reloadData()
                 }
@@ -160,19 +166,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.doneBtn.isHidden = true
             cell.yetToStartLbl.isHidden = false
             cell.CheckAndDateStackView.isHidden = true
+            cell.contentView.alpha = 0.5
         }
-        
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
