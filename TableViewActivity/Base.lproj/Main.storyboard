@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -40,7 +41,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVb-dT-d9O">
-                                                    <rect key="frame" x="311" y="61" width="59" height="28"/>
+                                                    <rect key="frame" x="295.5" y="61" width="74.5" height="28.5"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="filled">
                                                         <attributedString key="attributedTitle">
@@ -56,14 +57,14 @@
                                                         <action selector="doneBtnAction:" destination="2ee-GZ-af8" eventType="touchUpInside" id="r42-2G-nhJ"/>
                                                     </connections>
                                                 </button>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-E1-bmY">
-                                                    <rect key="frame" x="215" y="15" width="175" height="120"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-E1-bmY">
+                                                    <rect key="frame" x="215" y="11" width="175" height="128"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="U1i-1w-Ujc">
                                                             <rect key="frame" x="92" y="2" width="83" height="26.5"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Date and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-39-Lgb">
-                                                            <rect key="frame" x="0.0" y="60" width="175" height="60"/>
+                                                            <rect key="frame" x="0.0" y="70" width="175" height="58"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -75,14 +76,16 @@
                                                 <constraint firstItem="XVb-dT-d9O" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="4Ul-ih-LuH"/>
                                                 <constraint firstItem="U1i-1w-Ujc" firstAttribute="width" secondItem="H07-Yc-oJ5" secondAttribute="width" multiplier="0.2" id="Aaw-BT-ct4"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="XVb-dT-d9O" secondAttribute="trailing" constant="24" id="ENs-aT-sse"/>
-                                                <constraint firstItem="oVf-E1-bmY" firstAttribute="top" secondItem="H07-Yc-oJ5" secondAttribute="topMargin" constant="4" id="Euf-Se-Qc0"/>
+                                                <constraint firstItem="oVf-E1-bmY" firstAttribute="top" secondItem="H07-Yc-oJ5" secondAttribute="topMargin" id="Euf-Se-Qc0"/>
                                                 <constraint firstItem="fjh-eX-Q8a" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="N3x-Ob-vBD"/>
                                                 <constraint firstAttribute="trailing" secondItem="oVf-E1-bmY" secondAttribute="trailing" constant="24" id="OuK-jX-4Rg"/>
                                                 <constraint firstItem="U1i-1w-Ujc" firstAttribute="height" secondItem="H07-Yc-oJ5" secondAttribute="height" multiplier="0.2" id="R44-e5-FmV"/>
                                                 <constraint firstItem="kVH-me-aFe" firstAttribute="leading" secondItem="H07-Yc-oJ5" secondAttribute="leadingMargin" constant="24" id="Tbq-0m-huZ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="oVf-E1-bmY" secondAttribute="bottom" constant="4" id="cbM-J0-Wsu"/>
+                                                <constraint firstItem="XVb-dT-d9O" firstAttribute="height" secondItem="H07-Yc-oJ5" secondAttribute="height" multiplier="0.19" id="aHL-th-ptw"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="oVf-E1-bmY" secondAttribute="bottom" id="cbM-J0-Wsu"/>
                                                 <constraint firstItem="kVH-me-aFe" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="jV0-Lz-ebl"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="fjh-eX-Q8a" secondAttribute="trailing" constant="24" id="s4g-pA-tXt"/>
+                                                <constraint firstItem="XVb-dT-d9O" firstAttribute="width" secondItem="H07-Yc-oJ5" secondAttribute="width" multiplier="0.18" id="tHP-3y-cuE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
