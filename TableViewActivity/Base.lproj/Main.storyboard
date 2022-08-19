@@ -34,38 +34,37 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yet to start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjh-eX-Q8a">
-                                                    <rect key="frame" x="281" y="64.5" width="89" height="21.5"/>
-                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVb-dT-d9O">
-                                                    <rect key="frame" x="295.5" y="61" width="74.5" height="28.5"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled">
-                                                        <attributedString key="attributedTitle">
-                                                            <fragment content="DONE">
-                                                                <attributes>
-                                                                    <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                    </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="doneBtnAction:" destination="2ee-GZ-af8" eventType="touchUpInside" id="r42-2G-nhJ"/>
-                                                    </connections>
-                                                </button>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-E1-bmY">
-                                                    <rect key="frame" x="215" y="11" width="175" height="128"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ot0-6r-59z">
+                                                    <rect key="frame" x="208" y="59.5" width="162" height="31"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="U1i-1w-Ujc">
-                                                            <rect key="frame" x="92" y="2" width="83" height="26.5"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Date and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-39-Lgb">
-                                                            <rect key="frame" x="0.0" y="70" width="175" height="58"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 : 00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNR-nd-ndZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="86.5" height="31"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bF-3l-MoX">
+                                                            <rect key="frame" x="94.5" y="0.0" width="67.5" height="31"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="filled" title="START"/>
+                                                            <connections>
+                                                                <action selector="startStopButtonAction:" destination="2ee-GZ-af8" eventType="touchUpInside" id="t6w-4A-wHb"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="x4f-UP-bBt">
+                                                    <rect key="frame" x="242" y="51.5" width="128" height="47.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Completed" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hg4-oL-zAx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="21"/>
+                                                            <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="date Time Stamp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-aE-AZr">
+                                                            <rect key="frame" x="0.0" y="29" width="128" height="18.5"/>
+                                                            <fontDescription key="fontDescription" name="Helvetica-BoldOblique" family="Helvetica" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -73,28 +72,24 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XVb-dT-d9O" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="4Ul-ih-LuH"/>
-                                                <constraint firstItem="U1i-1w-Ujc" firstAttribute="width" secondItem="H07-Yc-oJ5" secondAttribute="width" multiplier="0.2" id="Aaw-BT-ct4"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="XVb-dT-d9O" secondAttribute="trailing" constant="24" id="ENs-aT-sse"/>
-                                                <constraint firstItem="oVf-E1-bmY" firstAttribute="top" secondItem="H07-Yc-oJ5" secondAttribute="topMargin" id="Euf-Se-Qc0"/>
-                                                <constraint firstItem="fjh-eX-Q8a" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="N3x-Ob-vBD"/>
-                                                <constraint firstAttribute="trailing" secondItem="oVf-E1-bmY" secondAttribute="trailing" constant="24" id="OuK-jX-4Rg"/>
-                                                <constraint firstItem="U1i-1w-Ujc" firstAttribute="height" secondItem="H07-Yc-oJ5" secondAttribute="height" multiplier="0.2" id="R44-e5-FmV"/>
+                                                <constraint firstItem="0bF-3l-MoX" firstAttribute="width" secondItem="H07-Yc-oJ5" secondAttribute="width" multiplier="0.163043" id="G6l-wl-iwE"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ot0-6r-59z" secondAttribute="trailing" constant="24" id="RVL-g2-EAR"/>
+                                                <constraint firstItem="x4f-UP-bBt" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="Swa-FP-aQJ"/>
                                                 <constraint firstItem="kVH-me-aFe" firstAttribute="leading" secondItem="H07-Yc-oJ5" secondAttribute="leadingMargin" constant="24" id="Tbq-0m-huZ"/>
-                                                <constraint firstItem="XVb-dT-d9O" firstAttribute="height" secondItem="H07-Yc-oJ5" secondAttribute="height" multiplier="0.19" id="aHL-th-ptw"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="oVf-E1-bmY" secondAttribute="bottom" id="cbM-J0-Wsu"/>
+                                                <constraint firstItem="ot0-6r-59z" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="gCy-m9-0kI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="x4f-UP-bBt" secondAttribute="trailing" constant="24" id="iNs-GJ-baY"/>
                                                 <constraint firstItem="kVH-me-aFe" firstAttribute="centerY" secondItem="H07-Yc-oJ5" secondAttribute="centerY" id="jV0-Lz-ebl"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fjh-eX-Q8a" secondAttribute="trailing" constant="24" id="s4g-pA-tXt"/>
-                                                <constraint firstItem="XVb-dT-d9O" firstAttribute="width" secondItem="H07-Yc-oJ5" secondAttribute="width" multiplier="0.18" id="tHP-3y-cuE"/>
+                                                <constraint firstItem="0bF-3l-MoX" firstAttribute="height" secondItem="H07-Yc-oJ5" secondAttribute="height" multiplier="0.206667" id="l6x-IH-KLe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="CheckAndDateStackView" destination="oVf-E1-bmY" id="lPy-1j-YaF"/>
                                             <outlet property="activityNameLbl" destination="kVH-me-aFe" id="pmr-ka-kxA"/>
-                                            <outlet property="checkImage" destination="U1i-1w-Ujc" id="3Ub-Rn-Buw"/>
-                                            <outlet property="dateTimeLbl" destination="rYa-39-Lgb" id="Zoa-4g-L2K"/>
-                                            <outlet property="doneBtn" destination="XVb-dT-d9O" id="NMe-CE-Afd"/>
-                                            <outlet property="yetToStartLbl" destination="fjh-eX-Q8a" id="AAt-L6-C1X"/>
+                                            <outlet property="completedDateTimeStack" destination="x4f-UP-bBt" id="O2Q-US-Kir"/>
+                                            <outlet property="completedLbl" destination="Hg4-oL-zAx" id="2pA-As-T88"/>
+                                            <outlet property="dateTimeLbl" destination="HZe-aE-AZr" id="kI8-sO-vMf"/>
+                                            <outlet property="startStopButton" destination="0bF-3l-MoX" id="T4u-EZ-jdf"/>
+                                            <outlet property="timerLbl" destination="hNR-nd-ndZ" id="spn-HT-wZZ"/>
+                                            <outlet property="timerStartButtonStack" destination="ot0-6r-59z" id="tGy-rL-9ic"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -138,7 +133,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
