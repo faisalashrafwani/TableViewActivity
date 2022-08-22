@@ -4,7 +4,6 @@
 //
 //  Created by admin on 16/08/22.
 //
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -195,4 +194,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     
 }
-
