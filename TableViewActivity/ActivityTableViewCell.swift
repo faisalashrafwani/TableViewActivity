@@ -23,11 +23,23 @@ class ActivityTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        config()
+        
     }
     
 
     @IBAction func startStopButtonAction(_ sender: Any) {
         self.callbackForStartStopButton?()
+        
+    }
+    
+    func config() {
+        startStopButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        startStopButton.titleLabel?.minimumScaleFactor = 0.2
+        startStopButton.titleLabel?.numberOfLines = 1
+        startStopButton.layer.cornerRadius = 5
+        startStopButton.titleEdgeInsets.left = 4
+        startStopButton.titleEdgeInsets.right = 4
         
     }
 }

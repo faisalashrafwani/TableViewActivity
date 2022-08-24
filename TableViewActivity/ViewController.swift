@@ -78,7 +78,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = activityTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ActivityTableViewCell
-        
+        cell.config()
         cell.activityNameLbl.text = dataForActivity[indexPath.row].title
         cell.startStopButton.setTitle("START", for: .normal)
         cell.timerStartButtonStack.isHidden = false
@@ -86,19 +86,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         if (indexPath.row == 0) {
             if (dataForActivity[indexPath.row].readyToStartNext != true) {
-                cell.contentView.alpha = 1
-                cell.selectionStyle = .default
                 cell.startStopButton.isEnabled = true
                 
             } else {
-                cell.contentView.alpha = 1
-                cell.selectionStyle = .default
                 cell.timerStartButtonStack.isHidden = true
                 
                 cell.dateTimeLbl.text = self.dataForActivity[indexPath.row].endDateTime
                 
                 cell.completedDateTimeStack.isHidden = false
             }
+            
+            cell.contentView.alpha = 1
+            cell.selectionStyle = .default
             
         }
         
@@ -106,11 +105,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             if (dataForActivity[indexPath.row].endDateTime == nil) {
                 cell.startStopButton.isHidden = false
                 cell.startStopButton.isEnabled = true
-                cell.contentView.alpha = 1
-                cell.selectionStyle = .default
             } else {
-                cell.contentView.alpha = 1
-                cell.selectionStyle = .default
                 
                 cell.timerStartButtonStack.isHidden = true
                 
@@ -120,6 +115,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 
             }
             
+            cell.contentView.alpha = 1
+            cell.selectionStyle = .default
         }
         
         else {
@@ -134,6 +131,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             if cell.startStopButton.titleLabel?.text == "START" {
                 self.dataForActivity[indexPath.row].readyToStartNext = true
                 self.dataForActivity[indexPath.row].startDateTime = self.getDateTime()
+                cell.config()
                 cell.startStopButton.setTitle("STOP", for: .normal)
                 
                 //TODO: TIMER FUNCTION HERE
