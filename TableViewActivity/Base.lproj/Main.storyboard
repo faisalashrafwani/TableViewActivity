@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eEk-9q-5Zp">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="90.5" width="414" height="771.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="150" id="2ee-GZ-af8" customClass="ActivityTableViewCell" customModule="TableViewActivity" customModuleProvider="target">
@@ -107,18 +107,35 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="N5G-gU-kcn"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQP-07-PdV">
+                                <rect key="frame" x="334" y="53" width="66" height="31"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="UNDO"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="UNDO" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="undoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xGs-S4-q74"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="XQP-07-PdV" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0345982" id="34i-Tu-VtT"/>
                             <constraint firstItem="eEk-9q-5Zp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9zR-8J-aFX"/>
+                            <constraint firstItem="XQP-07-PdV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" multiplier="1.2" id="KZj-Cg-k1O"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eEk-9q-5Zp" secondAttribute="bottom" id="QiL-5e-gdH"/>
+                            <constraint firstItem="eEk-9q-5Zp" firstAttribute="top" secondItem="XQP-07-PdV" secondAttribute="bottom" multiplier="1.08" id="Xzw-kD-dfM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eEk-9q-5Zp" secondAttribute="trailing" id="YW2-rU-7LL"/>
-                            <constraint firstItem="eEk-9q-5Zp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ylc-vY-hM3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XQP-07-PdV" secondAttribute="trailing" multiplier="1.035" id="aSR-dd-Bz6"/>
+                            <constraint firstItem="XQP-07-PdV" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.15942" id="fiE-F4-hA1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityTableView" destination="eEk-9q-5Zp" id="fv8-2v-Lup"/>
+                        <outlet property="undoBtn" destination="XQP-07-PdV" id="I4a-PZ-n03"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -132,6 +149,9 @@
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

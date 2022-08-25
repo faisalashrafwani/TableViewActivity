@@ -8,30 +8,35 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var activityTableView: UITableView!
+    @IBOutlet weak var undoBtn: UIButton!
+    
     var dataForActivity = [ActivityModel]()
     
     var timer: Timer = Timer()
     var count: Int = 0
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let activity1 = ActivityModel(id: 0, title: "Activity One", startDateTime: nil, endDateTime: nil, readyToStartNext: false)
+        let activity1 = ActivityModel(id: 0, title: "Activity One", startDateTime: nil, endDateTime: nil, status: ActivityStatus.readyToStart )
         dataForActivity.append(activity1)
-        let activity2 = ActivityModel(id: 1, title: "Activity Two", startDateTime: nil, endDateTime: nil, readyToStartNext: false)
+        let activity2 = ActivityModel(id: 1, title: "Activity Two", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
         dataForActivity.append(activity2)
-        let activity3 = ActivityModel(id: 2, title: "Activity Three", startDateTime: nil, endDateTime: nil, readyToStartNext: false)
+        let activity3 = ActivityModel(id: 2, title: "Activity Three", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
         dataForActivity.append(activity3)
-        let activity4 = ActivityModel(id: 3, title: "Activity Four", startDateTime: nil, endDateTime: nil, readyToStartNext: false)
+        let activity4 = ActivityModel(id: 3, title: "Activity Four", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
         dataForActivity.append(activity4)
-        let activity5 = ActivityModel(id: 4, title: "Activity Five", startDateTime: nil, endDateTime: nil, readyToStartNext: false)
+        let activity5 = ActivityModel(id: 4, title: "Activity Five", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
         dataForActivity.append(activity5)
+        
+        activityTableView.isHidden = true
+        undoBtn.isHidden = true
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        activityTableView.isHidden = true
         showAlert()
     }
     
@@ -45,7 +50,7 @@ class ViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.activityTableView.isHidden = false
-//            self.dataForActivity[0].readyToStartNext = true
+            self.undoBtn.isHidden = false
             self.activityTableView.reloadData()
         }))
         
@@ -59,6 +64,27 @@ class ViewController: UIViewController {
         dateFormatter.timeZone = TimeZone(identifier: "US")
         dateFormatter.locale = Locale(identifier: "en_US")
         return (dateFormatter.string(from: Date()))
+    }
+    
+    @IBAction func undoButtonAction(_ sender: Any) {
+        
+        if let itemPosition = dataForActivity.firstIndex(where: { $0.status == .readyToStart || $0.status == .ongoing }) {
+            if (dataForActivity[itemPosition].status == .ongoing) {
+                timer.invalidate()
+                dataForActivity[itemPosition].startDateTime = nil
+                dataForActivity[itemPosition].status = .readyToStart
+                dataForActivity[itemPosition].duration = 0
+            }
+            
+            else if (dataForActivity[itemPosition].status == .readyToStart && itemPosition != 0) {
+                dataForActivity[itemPosition].status = .yetToReady
+                dataForActivity[itemPosition - 1].status = .ongoing
+                dataForActivity[itemPosition - 1].endDateTime = nil
+            }
+
+            self.activityTableView.reloadData()
+        }
+   
     }
     
 }
@@ -78,85 +104,109 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = activityTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ActivityTableViewCell
-        cell.config()
-        cell.activityNameLbl.text = dataForActivity[indexPath.row].title
-        cell.startStopButton.setTitle("START", for: .normal)
-        cell.timerStartButtonStack.isHidden = false
-        cell.completedDateTimeStack.isHidden = true
         
-        if (indexPath.row == 0) {
-            if (dataForActivity[indexPath.row].readyToStartNext != true) {
-                cell.startStopButton.isEnabled = true
-                
-            } else {
-                cell.timerStartButtonStack.isHidden = true
-                
-                cell.dateTimeLbl.text = self.dataForActivity[indexPath.row].endDateTime
-                
-                cell.completedDateTimeStack.isHidden = false
-            }
+        switch(dataForActivity[indexPath.row].status) {
             
-            cell.contentView.alpha = 1
-            cell.selectionStyle = .default
+        case ActivityStatus.yetToReady :
+//            cell.backgroundColor = UIColor.red
+            cell.activityNameLbl.text = dataForActivity[indexPath.row].title
             
-        }
-        
-        else if (indexPath.row != 0 && dataForActivity[indexPath.row].readyToStartNext == true) {
-            if (dataForActivity[indexPath.row].endDateTime == nil) {
-                cell.startStopButton.isHidden = false
-                cell.startStopButton.isEnabled = true
-            } else {
-                
-                cell.timerStartButtonStack.isHidden = true
-                
-                cell.dateTimeLbl.text = self.dataForActivity[indexPath.row].endDateTime
-                
-                cell.completedDateTimeStack.isHidden = false
-                
-            }
-            
-            cell.contentView.alpha = 1
-            cell.selectionStyle = .default
-        }
-        
-        else {
             cell.contentView.alpha = 0.5
             cell.selectionStyle = .none
+            cell.timerStartButtonStack.isHidden = false
+            cell.completedDateTimeStack.isHidden = true
             cell.startStopButton.isEnabled = false
-            cell.startStopButton.isHidden = false
             cell.timerLbl.text = "00 : 00 : 00"
+            cell.startStopButton.setTitle("START", for: .normal)
+   
+            break
+            
+            
+        case ActivityStatus.readyToStart :
+//            cell.backgroundColor = UIColor.orange
+            cell.activityNameLbl.text = dataForActivity[indexPath.row].title
+            
+            cell.contentView.alpha = 1
+            cell.selectionStyle = .default
+            cell.timerStartButtonStack.isHidden = false
+            cell.completedDateTimeStack.isHidden = true
+            cell.startStopButton.isEnabled = true
+            cell.timerLbl.text = "00 : 00 : 00"
+            cell.startStopButton.setTitle("START", for: .normal)
+            
+            break
+            
+            
+        case ActivityStatus.ongoing :
+//            cell.backgroundColor = UIColor.green
+            cell.activityNameLbl.text = dataForActivity[indexPath.row].title
+            
+            cell.contentView.alpha = 1
+            cell.selectionStyle = .default
+            cell.timerStartButtonStack.isHidden = false
+            cell.completedDateTimeStack.isHidden = true
+            cell.startStopButton.isEnabled = true
+            cell.config()
+            cell.startStopButton.setTitle("STOP", for: .normal)
+//            cell.timerLbl.text = dataForActivity[indexPath.row].duration
+            
+            //TODO: TIMER FUNCTION HERE
+            if let count = self.dataForActivity[indexPath.row].duration {
+                self.count = count
+            }
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+                cell.timerLbl.text = self.timerCounter()
+            })
+            
+            break
+            
+            
+        case ActivityStatus.completed :
+//            cell.backgroundColor = UIColor.gray
+            cell.activityNameLbl.text = dataForActivity[indexPath.row].title
+            
+            cell.contentView.alpha = 1
+            cell.selectionStyle = .none
+            cell.timerStartButtonStack.isHidden = true
+            cell.completedDateTimeStack.isHidden = false
+            cell.dateTimeLbl.text = dataForActivity[indexPath.row].endDateTime
+            
+            break
+            
+            
+        default :
+            break
+            
+            
         }
         
         cell.callbackForStartStopButton = {
-            if cell.startStopButton.titleLabel?.text == "START" {
-                self.dataForActivity[indexPath.row].readyToStartNext = true
+            if (self.dataForActivity[indexPath.row].status == .readyToStart) {
+                self.dataForActivity[indexPath.row].status = .ongoing
                 self.dataForActivity[indexPath.row].startDateTime = self.getDateTime()
-                cell.config()
-                cell.startStopButton.setTitle("STOP", for: .normal)
-                
-                //TODO: TIMER FUNCTION HERE
-                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-                    cell.timerLbl.text = self.timerCounter()
-                })
-                
-                
-                
-            } else {
-                
-                if (indexPath.row < (self.dataForActivity.count - 1)) {
-                    self.dataForActivity[indexPath.row + 1].readyToStartNext = true
-                }
-                
-                //TODO: TIMER FUNCTION HERE
-                self.timer.invalidate()
-                self.count = 0
-                
-                self.dataForActivity[indexPath.row].endDateTime = self.getDateTime()
-                self.activityTableView.reloadData()
                 
             }
             
+            else if (self.dataForActivity[indexPath.row].status == .ongoing) {
+                self.dataForActivity[indexPath.row].status = .completed
+                self.dataForActivity[indexPath.row].endDateTime = self.getDateTime()
+                self.dataForActivity[indexPath.row].duration = self.count
+                
+                if (indexPath.row < self.dataForActivity.count - 1) {
+                    self.dataForActivity[indexPath.row + 1].status = .readyToStart
+                    
+                }
+                self.timer.invalidate()
+                self.count = 0
+                
+                
+            }
+            
+            self.activityTableView.reloadData()
         }
+        
+        
+        
         
         return cell
     }
