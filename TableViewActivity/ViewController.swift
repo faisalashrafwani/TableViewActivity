@@ -20,19 +20,27 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let activity1 = ActivityModel(id: 0, title: "Activity One", startDateTime: nil, endDateTime: nil, status: ActivityStatus.readyToStart )
+        let activity1 = ActivityModel(id: 0, title: "Activity One", status: ActivityStatus.readyToStart)
         dataForActivity.append(activity1)
-        let activity2 = ActivityModel(id: 1, title: "Activity Two", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
+        let activity2 = ActivityModel(id: 1, title: "Activity Two", status: ActivityStatus.yetToReady)
         dataForActivity.append(activity2)
-        let activity3 = ActivityModel(id: 2, title: "Activity Three", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
+        let activity3 = ActivityModel(id: 2, title: "Activity Three", status: ActivityStatus.yetToReady)
         dataForActivity.append(activity3)
-        let activity4 = ActivityModel(id: 3, title: "Activity Four", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
+        let activity4 = ActivityModel(id: 3, title: "Activity Four", status: ActivityStatus.yetToReady)
         dataForActivity.append(activity4)
-        let activity5 = ActivityModel(id: 4, title: "Activity Five", startDateTime: nil, endDateTime: nil, status: ActivityStatus.yetToReady)
+        let activity5 = ActivityModel(id: 4, title: "Activity Five", status: ActivityStatus.yetToReady)
         dataForActivity.append(activity5)
         
         activityTableView.isHidden = true
         undoBtn.isHidden = true
+        
+        
+//        let dates = Date()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            print("Async after 5 seconds \n")
+//            let time = dates.timeIntervalSinceNow
+//            print(time)
+//        }
         
     }
     
@@ -176,7 +184,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
         default :
             break
-            
             
         }
         
