@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     var timer: Timer = Timer()
     var count: Int = 0
-   
+    
     
     
     override func viewDidLoad() {
@@ -33,14 +33,6 @@ class ViewController: UIViewController {
         
         activityTableView.isHidden = true
         undoBtn.isHidden = true
-        
-        
-//        let dates = Date()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            print("Async after 5 seconds \n")
-//            let time = dates.timeIntervalSinceNow
-//            print(time)
-//        }
         
     }
     
@@ -75,24 +67,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func undoButtonAction(_ sender: Any) {
-        
-        if let itemPosition = dataForActivity.firstIndex(where: { $0.status == .readyToStart || $0.status == .ongoing }) {
-            if (dataForActivity[itemPosition].status == .ongoing) {
-                timer.invalidate()
-                dataForActivity[itemPosition].startDateTime = nil
-                dataForActivity[itemPosition].status = .readyToStart
-                dataForActivity[itemPosition].duration = 0
-            }
+        if let itemPositionForOngiong = dataForActivity.firstIndex(where: { $0.status == .ongoing }) {
+            timer.invalidate()
+            dataForActivity[itemPositionForOngiong].startDateTime = nil
+            dataForActivity[itemPositionForOngiong].status = .readyToStart
+            dataForActivity[itemPositionForOngiong].duration = 0
             
-            else if (dataForActivity[itemPosition].status == .readyToStart && itemPosition != 0) {
-                dataForActivity[itemPosition].status = .yetToReady
-                dataForActivity[itemPosition - 1].status = .ongoing
-                dataForActivity[itemPosition - 1].endDateTime = nil
+            if ((itemPositionForOngiong + 1) < dataForActivity.count) {
+                dataForActivity[itemPositionForOngiong + 1].status = .yetToReady
             }
-
-            self.activityTableView.reloadData()
         }
-   
+        
+        if let itemPositionForReady = dataForActivity.firstIndex(where: { $0.status == .readyToStart }) {
+            if itemPositionForReady != 0 {
+                dataForActivity[itemPositionForReady].status = .readyToStart
+                dataForActivity[itemPositionForReady - 1].status = .ongoing
+                dataForActivity[itemPositionForReady - 1].endDateTime = nil
+                
+            }
+        }
+        
+        self.activityTableView.reloadData()
     }
     
 }
@@ -116,7 +111,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         switch(dataForActivity[indexPath.row].status) {
             
         case ActivityStatus.yetToReady :
-//            cell.backgroundColor = UIColor.red
+            //            cell.backgroundColor = UIColor.red
             cell.activityNameLbl.text = dataForActivity[indexPath.row].title
             
             cell.contentView.alpha = 0.5
@@ -126,12 +121,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startStopButton.isEnabled = false
             cell.timerLbl.text = "00 : 00 : 00"
             cell.startStopButton.setTitle("START", for: .normal)
-   
+            
             break
             
             
         case ActivityStatus.readyToStart :
-//            cell.backgroundColor = UIColor.orange
+            //            cell.backgroundColor = UIColor.orange
             cell.activityNameLbl.text = dataForActivity[indexPath.row].title
             
             cell.contentView.alpha = 1
@@ -146,7 +141,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             
         case ActivityStatus.ongoing :
-//            cell.backgroundColor = UIColor.green
+            //            cell.backgroundColor = UIColor.green
             cell.activityNameLbl.text = dataForActivity[indexPath.row].title
             
             cell.contentView.alpha = 1
@@ -156,7 +151,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startStopButton.isEnabled = true
             cell.config()
             cell.startStopButton.setTitle("STOP", for: .normal)
-//            cell.timerLbl.text = dataForActivity[indexPath.row].duration
+            //            cell.timerLbl.text = dataForActivity[indexPath.row].duration
             
             //TODO: TIMER FUNCTION HERE
             if let count = self.dataForActivity[indexPath.row].duration {
@@ -170,7 +165,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             
         case ActivityStatus.completed :
-//            cell.backgroundColor = UIColor.gray
+            //            cell.backgroundColor = UIColor.gray
             cell.activityNameLbl.text = dataForActivity[indexPath.row].title
             
             cell.contentView.alpha = 1
@@ -180,7 +175,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateTimeLbl.text = dataForActivity[indexPath.row].endDateTime
             
             break
-            
             
         default :
             break
@@ -192,6 +186,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 self.dataForActivity[indexPath.row].status = .ongoing
                 self.dataForActivity[indexPath.row].startDateTime = self.getDateTime()
                 
+                if ((indexPath.row - 1) >= 0) {
+                    if (self.dataForActivity[indexPath.row - 1].status == .ongoing) {
+                        
+                        self.dataForActivity[indexPath.row - 1].status = .completed
+                        self.dataForActivity[indexPath.row - 1].endDateTime = self.getDateTime()
+                        self.dataForActivity[indexPath.row - 1].duration = self.count
+                        
+                        self.timer.invalidate()
+                        self.count = 0
+                    }
+                }
+                
+                if((indexPath.row + 1) < self.dataForActivity.count) {
+                    self.dataForActivity[indexPath.row + 1].status = .readyToStart
+                }
+                
             }
             
             else if (self.dataForActivity[indexPath.row].status == .ongoing) {
@@ -199,21 +209,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 self.dataForActivity[indexPath.row].endDateTime = self.getDateTime()
                 self.dataForActivity[indexPath.row].duration = self.count
                 
-                if (indexPath.row < self.dataForActivity.count - 1) {
-                    self.dataForActivity[indexPath.row + 1].status = .readyToStart
-                    
-                }
                 self.timer.invalidate()
                 self.count = 0
-                
                 
             }
             
             self.activityTableView.reloadData()
         }
-        
-        
-        
         
         return cell
     }
