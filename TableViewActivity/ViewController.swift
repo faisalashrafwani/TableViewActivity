@@ -121,6 +121,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startStopButton.isEnabled = false
             cell.timerLbl.text = "00 : 00 : 00"
             cell.startStopButton.setTitle("START", for: .normal)
+            cell.startStopButton.backgroundColor = .systemIndigo
             
             break
             
@@ -136,6 +137,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startStopButton.isEnabled = true
             cell.timerLbl.text = "00 : 00 : 00"
             cell.startStopButton.setTitle("START", for: .normal)
+            cell.startStopButton.backgroundColor = .systemIndigo
             
             break
             
@@ -151,6 +153,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startStopButton.isEnabled = true
             cell.config()
             cell.startStopButton.setTitle("STOP", for: .normal)
+            cell.startStopButton.backgroundColor = .red
             //            cell.timerLbl.text = dataForActivity[indexPath.row].duration
             
             //TODO: TIMER FUNCTION HERE

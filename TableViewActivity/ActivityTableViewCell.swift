@@ -37,7 +37,7 @@ class ActivityTableViewCell: UITableViewCell {
         startStopButton.titleLabel?.adjustsFontSizeToFitWidth = true
         startStopButton.titleLabel?.minimumScaleFactor = 0.2
         startStopButton.titleLabel?.numberOfLines = 1
-        startStopButton.layer.cornerRadius = 22
+        startStopButton.layer.cornerRadius = 18
         startStopButton.titleEdgeInsets.left = 4
         startStopButton.titleEdgeInsets.right = 4
         
